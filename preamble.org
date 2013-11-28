@@ -53,8 +53,7 @@ website, where the documentation (i.e. this file, itself) can be read in a much 
 ** Credits
 This configuration for Emacs, i.e. Emacs' Preamble is heavily inspired form (in order):
 - [[https://github.com/purcell/emacs.d][@purcell's emacs.d]]
-- [[https://github.com/steckerhalter/steckemacs][steckemacs]]
-
+- [[https://github.com/steckerhalter/steckemacs][steckemacs]
 ** License
 #+BEGIN_EXAMPLE
 Copyright (C) 2013  Nikhil Gupta <me@nikhgupta.com>
@@ -427,7 +426,7 @@ Specify the default font as =Source Code Pro=, which should already be [[http://
 #+BEGIN_SRC emacs-lisp
     (setq use-file-dialog 'nil) ; use mini-buffer for file dialogs
     (setq use-dialog-box  'nil) ; use mini-buffer for everythin' else..
-    (eval '(setq inhibit-startup-echo-area-message "nikhgupta"))
+    (eval '(setq inhibit-startup-echo-area-message "dev"))
 #+END_SRC
 
 *** Miscelleneous
@@ -540,7 +539,8 @@ for this purpose.
 #+BEGIN_SRC emacs-lisp
   (require 'package)
   (setq package-archives
-        '(("marmalade" . "http://marmalade-repo.org/packages/")
+        '(("gnu"       . "http://elpa.gnu.org/packages/")
+          ("marmalade" . "http://marmalade-repo.org/packages/")
           ("org"       . "http://orgmode.org/elpa/")
           ("melpa"     . "http://melpa.milkbox.net/packages/")))
   (package-initialize)
@@ -1236,6 +1236,7 @@ open, so as to make them distinguishable.
 ** General Configuration
 #+BEGIN_SRC emacs-lisp
   ;; set directories used by `org-mode'
+  (message "everything works: org-mode")
   (setq org-directory (expand-file-name "~/Organizer"))
   (setq org-archive-location (concat org-directory "/archives" ))
   (setq org-special-directory (concat org-directory "/special"))
@@ -1681,7 +1682,7 @@ what constitutes a project and what not.
 *** Configuration
 #+BEGIN_SRC emacs-lisp
   (preamble/require-packages '(css-eldoc haml-mode htmlize))
-  (require 'rainbow-mode)
+  ;; (require 'rainbow-mode)
 
   ;;; colourise hex colors
   (dolist (hook '(css-mode-hook html-mode-hook sass-mode-hook)) (add-hook hook 'rainbow-mode))
@@ -1744,7 +1745,7 @@ what constitutes a project and what not.
 
 *** Activation
 #+BEGIN_SRC emacs-lisp
-  (global-pretty-mode)
+  ;; (global-pretty-mode)
   (after 'redshank (diminish 'redshank-mode))
 
   ;; activate `emacs-slime-nav'
@@ -1847,72 +1848,6 @@ what constitutes a project and what not.
 
   (setq-default sql-input-ring-file-name
                 (expand-file-name ".sqli_history" preamble-dir))
-#+END_SRC
-
-* Session Management
-** Configuration
-#+BEGIN_SRC emacs-lisp
-  ;; save a list of open files in ~/.emacs.d/.emacs.desktop
-;  (setq desktop-path (list preamble-dir))
-;  (desktop-save-mode)
-
-  ;; display time taken in restoring desktop
-  (defadvice desktop-read (around time-restore activate)
-    (let ((start-time (current-time)))
-      (prog1
-          ad-do-it
-        (message "Desktop restored in %.2fms"
-                 (preamble/time-subtract-millis (current-time) start-time)))))
-
-  ;; display time taken in restoring a buffer
-  (defadvice desktop-create-buffer (around time-create activate)
-    (let ((start-time (current-time))
-          (filename (ad-get-arg 1)))
-      (prog1
-          ad-do-it
-        (message "Desktop: took me %.2fms to restore %s"
-                 (preamble/time-subtract-millis (current-time) start-time)
-                 (when filename
-                   (abbreviate-file-name filename))))))
-#+END_SRC
-
-** Restore Session Variables
-#+BEGIN_SRC emacs-lisp
-  ;; restore histories and registers after saving
-  (preamble/require-package 'session)
-
-  (setq session-save-file (expand-file-name ".session" preamble-dir))
-  (add-hook 'after-init-hook 'session-initialize)
-
-  ;; save a bunch of variables to the desktop file
-  ;; for lists specify the len of the maximal saved data also
-  (setq desktop-globals-to-save
-        (append '((extended-command-history . 30)
-                  (file-name-history        . 100)
-                  (ido-last-directory-list  . 100)
-                  (ido-work-directory-list  . 100)
-                  (ido-work-file-list       . 100)
-                  (grep-history             . 30)
-                  (compile-history          . 30)
-                  (minibuffer-history       . 50)
-                  (query-replace-history    . 60)
-                  (read-expression-history  . 60)
-                  (regexp-history           . 60)
-                  (regexp-search-ring       . 20)
-                  (search-ring              . 20)
-                  (comint-input-ring        . 50)
-                  (shell-command-history    . 50)
-                  desktop-missing-file-warning
-                  tags-file-name
-                  register-alist)))
-#+END_SRC
-
-** Restore Frame
-#+BEGIN_SRC emacs-lisp
-  (when (eval-when-compile (string< emacs-version "24.3.50"))
-    (unless (boundp 'desktop-restore-frames)
-      (preamble/require-package 'frame-restore)
-      (frame-restore)))
 #+END_SRC
 
 * Version Management

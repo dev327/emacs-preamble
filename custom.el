@@ -18,21 +18,20 @@
  '(linum-format "%4d ")
  '(org-modules (quote (org-bbdb org-bibtex org-crypt org-ctags org-docview org-gnus org-habit org-info org-irc org-mhe org-rmail org-w3m org-bullets org-choose org-collector org-drill org-mac-iCal org-mac-link)))
  '(org-outline-path-complete-in-steps nil)
- '(org-refile-use-outline-path (quote file))
- '(session-use-package t nil (session)))
+ '(org-refile-use-outline-path (quote file)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:background "nil"))))
+ '(default ((t (:background "#2d2d2d"))))
  '(linum ((t (:inherit (shadow default) :background "color-236" :foreground "color-239"))))
  '(org-agenda-dimmed-todo-face ((t (:inherit outline-9))))
  '(org-block-background ((t (:background "#383838"))))
  '(org-block-begin-line ((t (:inherit org-meta-line :background "#555555" :foreground "#cccccc"))) t)
  '(org-block-end-line ((t (:inherit org-meta-line :background "#555555" :foreground "#cccccc"))) t)
- '(org-hide ((t nil)))
+ '(org-hide ((t (:background "#2d2d2d":foreground "#2d2d2d"))))
  '(org-level-1 ((t (:inherit outline-1))))
  '(org-level-2 ((t (:inherit outline-2))))
  '(org-level-4 ((t (:inherit outline-4))))
@@ -41,15 +40,15 @@
  '(org-level-8 ((t (:inherit outline-8))))
  '(org-priority ((t (:inherit outline-9))))
  '(org-tag ((t (:inherit outline-9))))
- '(outline-1 ((t (:inherit nil :foreground "#f2777a"))))
- '(outline-2 ((t (:inherit nil :foreground "#ffcc66"))))
- '(outline-3 ((t (:inherit nil :foreground "#99cc99"))))
- '(outline-4 ((t (:inherit nil :foreground "#6699cc"))))
- '(outline-5 ((t (:inherit nil :foreground "#cc99cc"))))
- '(outline-6 ((t (:inherit nil :foreground "#66cccc"))))
- '(outline-7 ((t (:inherit nil :foreground "#f99157"))))
- '(outline-8 ((t (:inherit nil :foreground "#a09f93"))))
- '(outline-9 ((t (:inherit nil :foreground "#666666"))) t))
+ '(outline-1 ((t (:foreground "#f2777a"))))
+ '(outline-2 ((t (:foreground "#ffcc66"))))
+ '(outline-3 ((t (:foreground "#99cc99"))))
+ '(outline-4 ((t (:foreground "#6699cc"))))
+ '(outline-5 ((t (:foreground "#cc99cc"))))
+ '(outline-6 ((t (:foreground "#66cccc"))))
+ '(outline-7 ((t (:foreground "#f99157"))))
+ '(outline-8 ((t (:foreground "#a09f93"))))
+ '(outline-9 ((t (:foreground "#666666"))) t))
 
 (provide 'custom)
 ;;; custom.el ends here

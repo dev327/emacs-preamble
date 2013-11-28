@@ -42,22 +42,22 @@
 (package-initialize)
 
 ;; get the org-version but avoid calling org functions to prevent autoloading
-(let ((org-version
-       (with-temp-buffer
-         (require 'find-func)
-         (insert-file-contents (find-library-name "org-version"))
-         (re-search-forward "(org-release \"\\(.*?\\)\")")
-         (match-string 1))))
+;;(let ((org-version
+;;       (with-temp-buffer
+;;         (require 'find-func)
+;;         (insert-file-contents (find-library-name "org-version"))
+;;         (re-search-forward "(org-release \"\\(.*?\\)\")")
+;;         (match-string 1))))
 
   ;; update org-mode to v8.0+, if required.
-  (message "Found your org-mode version to be %s." org-version)
-  (if (version< org-version "8.0")
-      (progn
-        (message "Upgrading your org-mode version..")
-        (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-        (package-refresh-contents)
-        (package-install 'org-plus-contrib))
-    (message "Great. We can, now, proceed to literally load our configuration. :)")))
+;;  (message "Found your org-mode version to be %s." org-version)
+;;  (if (version< org-version "8.0")
+;;      (progn
+;;        (message "Upgrading your org-mode version..")
+;;        (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+;;        (package-refresh-contents)
+;;        (package-install 'org-plus-contrib))
+;;    (message "Great. We can, now, proceed to literally load our configuration. :)")))
 
 ;; load our configuration file
 (org-babel-load-file (expand-file-name "preamble.org" preamble-dir))
